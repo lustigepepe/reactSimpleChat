@@ -1,0 +1,105 @@
+%button-shared {
+  appearance: none;
+  background: #fff;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  font-size: 13px;
+  padding: 6px 10px;
+  width: 150px;
+
+  &:hover {
+    background: #000;
+    color: #fff;
+  }
+}
+%chat-shared {
+  position: fixed;
+  padding-bottom: 15px;
+  transition: all .8s ease-in-out;
+}
+
+.WrapperFontOptionContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.App {
+
+  background-color: #42c5f4;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .ControlChatBtn {
+    @extend %button-shared;
+    position: fixed;
+    bottom: 20px;
+    right: 200px;
+  }
+
+  .ControlTextBtn {
+    @extend %button-shared;
+
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+
+
+  }
+}
+
+.chatLeft {
+  @extend %chat-shared;
+  left: 0;
+  padding-left: 15%;
+}
+
+.chatRight {
+  @extend %chat-shared;
+  right: 0;
+  padding-right: 15%;
+}
+
+.Wrapper {
+  max-width: 800px;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.TexBoxContainer {
+  margin-top: 20px;
+}
+
+.App-intro {
+  display: none
+}
+
+.HideChatControl {
+  .chatLeft {
+    left: -90%
+  }
+
+  .chatRight {
+    right: -90%
+  }
+
+  .TextBox .TextBox__CTA {
+    display: none;
+  }
+
+  .TextBox.isActive {
+    background-color: transparent;
+  }
+}
+
+.HideTextControl{
+  .FontOptionContainer {
+    top: -250px;
+  }
+}
