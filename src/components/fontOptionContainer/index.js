@@ -10,7 +10,7 @@ import './FontOptionContainer.css'
 export class FontOptionContainer extends Component {
    
     handleChangeFontSize(event) {
-        this.props.changeFontSize(event.target.value, this.props.fontSize)
+        this.props.changeFontSize(event.target.value)
     }
 
     render() {

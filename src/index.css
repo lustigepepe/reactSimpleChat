@@ -1,4 +1,6 @@
-@import url('https://fonts.googleapis.com/css?family=Roboto|Marck+Script|Oswald:400,700');
+/* @import url('https://fonts.googleapis.com/css?family=Roboto|Marck+Script|Oswald:400,700');
+@import url('https://fonts.googleapis.com/css?family=Aleo |Marck+Script|Oswald:400,700'); */
+
 
 
 html {
@@ -14,7 +16,7 @@ html {
 body {
   margin: 0;
   padding: 0;
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Aleo', serif;
   font-size: 16px;
 }
 

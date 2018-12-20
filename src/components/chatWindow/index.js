@@ -1,19 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import './ChatWindow.css';
+import FontChatAction from './../../containers/actions';
+
 import catPic from './../../img/cat.jpg';
-import docPic from './../../img/dog.jpg';
+import dogPic from './../../img/dog.jpg';
 import './ChatWindow.css';
-
-// import { connect } from 'react-redux';
-// import PropTypes from 'prop-types';
-// import enhanceWithClickOutside from 'react-click-outside';
-// import GFontsAction from './../../containers/actions';
-// import { getFontWeightAndSyle } from './../../helper';
-
-
-
+import {store} from './../../redux';
 import Message from './Message.js';
+import { Action } from 'redux'
+
 
 class ChatWindow extends React.Component {
     constructor(props) {
@@ -23,7 +21,7 @@ class ChatWindow extends React.Component {
             chats: [{
                 username: "Jon Do",
                 content: <p>How are you doing!</p>,
-                img: docPic,
+                img: dogPic,
             }, {
                 username: "Kim Kun",
                 content: <p>yes and you</p>,
@@ -31,17 +29,30 @@ class ChatWindow extends React.Component {
             },  {
                 username: "Jon Do",
                 content: <p>Me too</p>,
-                img: docPic,
-            }]
+                img: dogPic,
+                id: 0,
+            }],
         };
-
-        this.submitMessage = this.submitMessage.bind(this);
     }
-
+    chat = {}
     componentDidMount() {
         this.scrollToDown();
+        // store.subscribe(_=>{
+        //     var chat = store.getState();
+          
+           
+        //     this.setState({
+        //         chats: this.state.chats.concat([{
+        //             username: chat.chatUser,
+        //             content: <p>{chat.chatMessage}</p>,
+        //             img: chat.chatUser === "Kim Kun" ? catPic : dogPic,
+        //             id: this.currentChatId,
+        //         }])
+        //     }, () => {
+        //         ReactDOM.findDOMNode(this.refs.msg).value = "";
+        //     });
+        // });
     }
-
     componentDidUpdate() {
         this.scrollToDown();
     }
@@ -49,27 +60,36 @@ class ChatWindow extends React.Component {
     scrollToDown() {
         ReactDOM.findDOMNode(this.refs.chats).scrollTop = ReactDOM.findDOMNode(this.refs.chats).scrollHeight;
     }
-
-    submitMessage(e) {
-        e.preventDefault();
-
+        
+    submitMessage(event) {
+        var inputText = ReactDOM.findDOMNode(this.refs.msg).value;
+        event.preventDefault();
+        if(!inputText)
+        return;
+       
+        this.props.addedChatMessage(this.props.userName, inputText);
         this.setState({
             chats: this.state.chats.concat([{
-                username: "Kevin Hsu",
+                username: this.props.userName,
                 content: <p>{ReactDOM.findDOMNode(this.refs.msg).value}</p>,
-                img: "http://i.imgur.com/Tj5DGiO.jpg",
+                img: this.props.userName === "Kim Kun" ? catPic : dogPic,
             }])
         }, () => {
             ReactDOM.findDOMNode(this.refs.msg).value = "";
         });
-    }
+        
 
+     
+    }
+    
     render() {
-        const username = "Kevin Hsu";
+        // const username = "Kevin Hsu";
+        const username = this.props.userName;
+
         const { chats } = this.state;
 
         const chatClass = {
-            fontSize: `${this.props.chatWindowFondSize}px`,
+            fontSize: `${this.props.fontSize}px`,
         }
 
         return (
@@ -93,6 +113,27 @@ class ChatWindow extends React.Component {
     }
 }
 
+ChatWindow.propTypes = {
+    chatUser: PropTypes.string,
+    chatMessage: PropTypes.string,
+};
 
 
-export default ChatWindow;
+function mapStateToProps(state) {
+    return {
+      chatUser: state.ChatReducer.chatUser,
+      chatMessage: state.ChatReducer.chatMessage,
+    }
+  }
+  
+  function mapDispatchToProps(dispatch) {
+    return {
+    addedChatMessage: (chatUser, chatMessage, chatId) => {
+        dispatch(FontChatAction.addedChatMessage(dispatch, chatUser, chatMessage))
+      }
+    }
+  }
+  
+export default connect(mapStateToProps, mapDispatchToProps)(ChatWindow)
+  
+// export default ChatWindow;

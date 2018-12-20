@@ -13,6 +13,7 @@ export function ChatReducer(state = initialState, action) {
         case "CHAT_MESSAGE_ADDED":
             newState.chatMessage = action.payload.chatMessage;
             newState.chatUser = action.payload.chatUser;
+            newState.chatId = action.payload.chatId;
             break;
         default:
             break;

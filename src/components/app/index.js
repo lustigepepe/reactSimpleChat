@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import FontAction from './../../containers/actions';
 
 import FontOptionContainer from './../fontOptionContainer';
 import ChatWindow from './../chatWindow';
@@ -13,19 +12,16 @@ class App extends Component {
       isHideTextControl: false,
       isHideChatControl: false,
     }
-    // this.handleControlBtn = this.handleControlBtn.bind(this);
   }
 
-  // componentDidMount() {
-  //   this.props.fetchData();
-  // }
   handleChatControlBtn() {
     this.setState({ isHideChatControl: !this.state.isHideChatControl });
+    
   }
-
+  
   handleTextControlBtn() {
     this.setState({ isHideTextControl: !this.state.isHideTextControl });
-
+    
   }
   render() {
     return (
@@ -34,10 +30,10 @@ class App extends Component {
           {
             <div className="App">
               <div className="chatLeft">
-                <ChatWindow chatWindowFondSize={this.props.fontSize} />
+                <ChatWindow fontSize={this.props.fontSize} userName="Jon Do" />
               </div>
               <div className="chatRight">
-                <ChatWindow chatWindowFondSize={this.props.fontSize} />
+                <ChatWindow fontSize={this.props.fontSize} userName="Kim Kun"/>
               </div>
               <FontOptionContainer />
               <section className="Wrapper">
@@ -64,16 +60,10 @@ class App extends Component {
 function mapStateToProps(state) {
   return {
     fontSize: state.FontReducer.fontSize,
+    chatUser: state.ChatReducer.chatUser,
+    chatMessage: state.ChatReducer.chatMessage,
   }
 }
 
-// function mapDispatchToProps(dispatch) {
-//   return {
-//     fetchData: () => {
-//       dispatch(FontAction.fetchData(dispatch))
-//     }
-//   }
-// }
 
 export default connect(mapStateToProps)(App)
-// export default (App)
