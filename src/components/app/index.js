@@ -67,13 +67,13 @@ function mapStateToProps(state) {
   }
 }
 
-function mapDispatchToProps(dispatch) {
-  return {
-    fetchData: () => {
-      dispatch(FontAction.fetchData(dispatch))
-    }
-  }
-}
+// function mapDispatchToProps(dispatch) {
+//   return {
+//     fetchData: () => {
+//       dispatch(FontAction.fetchData(dispatch))
+//     }
+//   }
+// }
 
-export default connect(mapStateToProps, mapDispatchToProps)(App)
+export default connect(mapStateToProps)(App)
 // export default (App)

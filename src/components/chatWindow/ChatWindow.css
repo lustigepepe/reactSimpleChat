@@ -35,9 +35,6 @@
   margin: 10px 0;
   max-width: 200px; }
 
-.chatwidget .T {
-  font-size: 26px; }
-
 .chatwidget .chatroom .chats .chat img {
   width: 20px;
   height: 20px;
@@ -63,7 +60,7 @@
   align-items: center; }
 
 .chatwidget .inputField {
-  background: rgba(255, 255, 255, 0.5);
+  background: #FFF;
   outline: 0;
   border: 2px solid #2f5968;
   padding: 0 5px;

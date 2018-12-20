@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 // import Select from 'react-select';
 // import _map from 'lodash/map';
 
-import GFontsAction from './../../containers/actions';
+import FontAction from './../../containers/actions';
 import './FontOptionContainer.css'
 
 export class FontOptionContainer extends Component {
@@ -53,9 +53,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-      
         changeFontSize: (fontSize) => {
-            dispatch(GFontsAction.changeFontSize(dispatch, fontSize))
+            dispatch(FontAction.changeFontSize(dispatch, fontSize))
         }
     }
 }
