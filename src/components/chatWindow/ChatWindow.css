@@ -23,7 +23,7 @@
   height: 510px;
   overflow-y: scroll; }
 
-.chatwidget .chatroom .chats .chat {
+.chatwidget .chat {
   background: rgba(255, 255, 255, 0.8);
   position: relative;
   padding: 5px 13px;
@@ -34,6 +34,9 @@
   clear: both;
   margin: 10px 0;
   max-width: 200px; }
+
+.chatwidget .T {
+  font-size: 26px; }
 
 .chatwidget .chatroom .chats .chat img {
   width: 20px;
@@ -59,7 +62,8 @@
   flex-direction: row;
   align-items: center; }
 
-.chatwidget .chatroom .input input[type="text"] {
+.chatwidget .inputField {
+  background: rgba(255, 255, 255, 0.5);
   outline: 0;
   border: 2px solid #2f5968;
   padding: 0 5px;

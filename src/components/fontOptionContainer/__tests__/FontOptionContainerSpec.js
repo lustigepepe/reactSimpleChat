@@ -13,7 +13,7 @@ describe('FontOptionContainer', () => {
                     isActive: true,
                     fontFamily: "",
                     fontVariant: "",
-                    fontSize: "40",
+                    fontSize: "14",
                     value: "",
                     color: {
                         r: '0',

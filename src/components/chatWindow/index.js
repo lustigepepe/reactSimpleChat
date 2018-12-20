@@ -1,9 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './ChatWindow.css';
-import cat from './../../img/cat.jpg';
-import dog from './../../img/dog.jpg';
+import catPic from './../../img/cat.jpg';
+import docPic from './../../img/dog.jpg';
 import './ChatWindow.css';
+
+// import { connect } from 'react-redux';
+// import PropTypes from 'prop-types';
+// import enhanceWithClickOutside from 'react-click-outside';
+// import GFontsAction from './../../containers/actions';
+// import { getFontWeightAndSyle } from './../../helper';
+
+
 
 import Message from './Message.js';
 
@@ -14,16 +22,16 @@ class ChatWindow extends React.Component {
         this.state = {
             chats: [{
                 username: "Jon Do",
-                content: <p>Hello World!</p>,
-                img: dog,
+                content: <p>How are you doing!</p>,
+                img: docPic,
             }, {
                 username: "Kim Kun",
-                content: <p>Love it! :heart:</p>,
-                img: cat
+                content: <p>yes and you</p>,
+                img: catPic
             },  {
                 username: "Jon Do",
-                content: <p>Definitely! Sounds great!</p>,
-                img: dog,
+                content: <p>Me too</p>,
+                img: docPic,
             }]
         };
 
@@ -60,19 +68,23 @@ class ChatWindow extends React.Component {
         const username = "Kevin Hsu";
         const { chats } = this.state;
 
+        const chatClass = {
+            fontSize: `${this.props.chatWindowFondSize}px`,
+        }
+
         return (
             <div className="chatwidget">
                 <div className="chatroom">
                     <h3>Chattime</h3>
                     <ul className="chats" ref="chats">
                         {
-                            chats.map((chat) => 
-                                <Message chat={chat} user={username} />
+                            chats.map((chat, i) => 
+                                <Message chatClass={chatClass} chat={chat} user={username} key={i} />
                             )
                         }
                     </ul>
                     <form className="input" onSubmit={(e) => this.submitMessage(e)}>
-                        <input type="text" ref="msg" />
+                        <input type="text" className="inputField" style={chatClass} ref="msg" />
                         <input type="submit" value="Submit" />
                     </form>
                 </div>
@@ -80,5 +92,7 @@ class ChatWindow extends React.Component {
         );
     }
 }
+
+
 
 export default ChatWindow;

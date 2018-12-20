@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import FontAction from './../../containers/actions';
 
 import FontOptionContainer from './../fontOptionContainer';
-import TextBoxContainer from './../textBoxContainer';
 import ChatWindow from './../chatWindow';
 import './App.css';
 
@@ -22,31 +21,26 @@ class App extends Component {
   // }
   handleChatControlBtn() {
     this.setState({ isHideChatControl: !this.state.isHideChatControl });
-    console.log(this.state.isHideChatControl);
   }
+
   handleTextControlBtn() {
     this.setState({ isHideTextControl: !this.state.isHideTextControl });
-    console.log(this.state.isHideTextControl);
 
   }
   render() {
     return (
-      <div>
       <div className={this.state.isHideChatControl ? "HideChatControl" : "ShowChatControl"}>
         <div className={this.state.isHideTextControl ? "HideTextControl" : "ShowTextControl"}>
           {
             <div className="App">
               <div className="chatLeft">
-                <ChatWindow />
+                <ChatWindow chatWindowFondSize={this.props.fontSize} />
               </div>
               <div className="chatRight">
-                <ChatWindow />
+                <ChatWindow chatWindowFondSize={this.props.fontSize} />
               </div>
               <FontOptionContainer />
               <section className="Wrapper">
-                <div className="TexBoxContainerWrapper">
-                  <TextBoxContainer textBoxes={this.props.textBoxOption} />
-                </div>
                 <button type="button"
                   onClick={() => this.handleChatControlBtn()}
                   className="ControlChatBtn">
@@ -60,10 +54,8 @@ class App extends Component {
               </section>
             </div>
           }
+          </div>
         </div>
-      </div>
-        
-    </div>
     );
   }
 }
@@ -71,11 +63,7 @@ class App extends Component {
 
 function mapStateToProps(state) {
   return {
-    userSelectedTextBox: state.FontReducer.userSelectedTextBox,
-    textBoxOption: state.FontReducer.textBoxOption,
-    fonts: state.FontReducer.fonts,
-    availableCategories: state.FontReducer.availableCategories,
-    availableFontFamilies: state.FontReducer.availableFontFamilies
+    fontSize: state.FontReducer.fontSize,
   }
 }
 
