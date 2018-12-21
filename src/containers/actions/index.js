@@ -21,5 +21,17 @@ export default {
                 }
             });
         }
+    },
+    addToChatMessageArray: (dispatch, chatUser, chatMessage, chatImg) => {
+        return dispatch => {
+            dispatch({
+                type: "ADD_CHAT_MESSAGE_TO_ARRAY",
+                payload: {
+                    chatMessage: chatMessage,
+                    chatUser: chatUser,
+                    chatImg: chatImg
+                }
+            });
+        }
     }
 }

@@ -12,7 +12,6 @@ export class FontOptionContainer extends Component {
     handleChangeFontSize(event) {
         this.props.changeFontSize(event.target.value)
     }
-
     render() {
         let fontSize = this.props.fontSize;
         return (
