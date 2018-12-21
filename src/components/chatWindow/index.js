@@ -5,6 +5,8 @@ import PropTypes from 'prop-types';
 import './ChatWindow.css';
 import FontChatAction from './../../containers/actions';
 import {updateChat} from './../../containers/observable/actions';
+import isEqual from 'is-equal'
+import watch from 'redux-watch'
 
 import catPic from './../../img/cat.jpg';
 import dogPic from './../../img/dog.jpg';
@@ -36,6 +38,17 @@ class ChatWindow extends React.Component {
     }
     componentDidMount() {
         this.scrollToDown();
+
+
+        let w = watch(store.getState, 'ChatReducer', isEqual)
+        store.subscribe(w((newVal, oldVal, objectPath) => {
+          // response to changes
+          console.log('newVal: '+ newVal.chatUser+ ' oldVal: '+ oldVal.chatUser + ' objectPath: '+objectPath ) 
+        }))
+
+
+
+
         // store.subscribe(_=>{
 
 
@@ -68,10 +81,8 @@ class ChatWindow extends React.Component {
         event.preventDefault();
         if(!inputText)
         return;
-        this.lastStateId = store.getState().FontReducer.fontSize;
         this.props.addedChatMessage(this.props.userName, inputText);
-        // this.props.addToChatMessageArray(this.props.userName, inputText,
-        //      this.props.userName === "Kim Kun" ? catPic : dogPic);
+       
         this.setState({
             chats: this.state.chats.concat([{
                 username: this.props.userName,
