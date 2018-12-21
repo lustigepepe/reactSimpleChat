@@ -36,37 +36,22 @@ class ChatWindow extends React.Component {
             }],
         };
     }
+
+
     componentDidMount() {
         this.scrollToDown();
-
-
         let w = watch(store.getState, 'ChatReducer', isEqual)
         store.subscribe(w((newVal, oldVal, objectPath) => {
-          // response to changes
-          console.log('newVal: '+ newVal.chatUser+ ' oldVal: '+ oldVal.chatUser + ' objectPath: '+objectPath ) 
+          this.setState({
+              chats: this.state.chats.concat([{
+                  username: newVal.chatUser,
+                  content: <p>{newVal.chatMessage}</p>,
+                  img: newVal.chatUser === "Kim Kun" ? catPic : dogPic,
+              }])
+          }, () => {
+              ReactDOM.findDOMNode(this.refs.msg).value = "";
+          });
         }))
-
-
-
-
-        // store.subscribe(_=>{
-
-
-        // var chat = store.getState();
-        // console.log('componentDidMount'+ this.lastStateId );
-        // console.log(store.getState());
-        
-        // this.setState({
-        //     chats: this.state.chats.concat([{
-        //         username: chat.chatUser,
-        //         content: <p>{chat.chatMessage}</p>,
-        //         img: chat.chatUser === "Kim Kun" ? catPic : dogPic,
-        //         id: this.currentChatId,
-        //     }])
-        // }, () => {
-        //     ReactDOM.findDOMNode(this.refs.msg).value = "";
-        // });
-        // });
     }
     componentDidUpdate() {
         this.scrollToDown();
@@ -82,28 +67,14 @@ class ChatWindow extends React.Component {
         if(!inputText)
         return;
         this.props.addedChatMessage(this.props.userName, inputText);
-       
-        this.setState({
-            chats: this.state.chats.concat([{
-                username: this.props.userName,
-                content: <p>{ReactDOM.findDOMNode(this.refs.msg).value}</p>,
-                img: this.props.userName === "Kim Kun" ? catPic : dogPic,
-            }])
-        }, () => {
-            ReactDOM.findDOMNode(this.refs.msg).value = "";
-        });
     }
     
     render() {
-        // const username = "Kevin Hsu";
         const username = this.props.userName;
-
         const { chats } = this.state;
-
         const chatClass = {
             fontSize: `${this.props.fontSize}px`,
         }
-
         return (
             <div className="chatwidget">
                 <div className="chatroom">
@@ -130,14 +101,10 @@ ChatWindow.propTypes = {
     chatMessage: PropTypes.string,
 };
 
-
 function mapStateToProps(state) {
     return {
       chatUser: state.ChatReducer.chatUser,
       chatMessage: state.ChatReducer.chatMessage,
-      chatMessageArray: state.ChatReducer.initialStateWithUsers,
-    //   subscribeChatMessage: state.ChatMessage.chatMessage,
-
     }
   }
   
@@ -146,13 +113,9 @@ function mapDispatchToProps(dispatch) {
     addedChatMessage: (chatUser, chatMessage) => {
         dispatch(FontChatAction.addedChatMessage(dispatch, chatUser, chatMessage))
       },
-    addToChatMessageArray: (chatUser, chatMessage, chatImg) => {
-        dispatch(FontChatAction.addToChatMessageArray(dispatch, chatUser, chatMessage, chatImg))
-      },
       updateChat,
     }
   }
   
 export default connect(mapStateToProps, mapDispatchToProps)(ChatWindow)
   
-// export default ChatWindow;

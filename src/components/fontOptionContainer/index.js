@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-// import Select from 'react-select';
-// import _map from 'lodash/map';
 
 import FontAction from './../../containers/actions';
 import './FontOptionContainer.css'
@@ -41,7 +39,6 @@ FontOptionContainer.propTypes = {
   
     fontSize: PropTypes.string
 };
-
 
 function mapStateToProps(state) {
     return {

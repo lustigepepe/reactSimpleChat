@@ -5,7 +5,6 @@ import App from './components/app';
 import * as serviceWorker from './serviceWorker';
 import { Provider } from 'react-redux';
 import store from './redux';
-import { observer, observe } from 'redux-observers'
 
 
 ReactDOM.render(

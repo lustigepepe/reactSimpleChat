@@ -56,7 +56,6 @@ class App extends Component {
   }
 }
 
-
 function mapStateToProps(state) {
   return {
     fontSize: state.FontReducer.fontSize,
@@ -64,6 +63,5 @@ function mapStateToProps(state) {
     chatMessage: state.ChatReducer.chatMessage,
   }
 }
-
 
 export default connect(mapStateToProps)(App)

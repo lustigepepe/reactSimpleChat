@@ -5,7 +5,6 @@ let initialState = {
     chatUser: "",
 }
 
-// export function ChatReducer(state = initialState, state = initialState, action) {
 export function ChatReducer(state = initialState, action) {
     let newState = _cloneDeep(state);
     switch (action.type) {
